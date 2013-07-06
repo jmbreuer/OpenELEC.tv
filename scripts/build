@@ -288,13 +288,13 @@ if [ ! -f $STAMP ]; then
         make_$TARGET
       else
         if [ "$TARGET" = "target" ]; then
-          make $PKG_MAKE_OPTS_TARGET
+          make $MAKEOPTS $PKG_MAKE_OPTS_TARGET
         elif [ "$TARGET" = "host" ]; then
-          make $PKG_MAKE_OPTS_HOST
+          make $MAKEOPTS $PKG_MAKE_OPTS_HOST
         elif [ "$TARGET" = "init" ]; then
-          make $PKG_MAKE_OPTS_INIT
+          make $MAKEOPTS $PKG_MAKE_OPTS_INIT
         elif [ "$TARGET" = "bootstrap" ]; then
-          make $PKG_MAKE_OPTS_BOOTSTRAP
+          make $MAKEOPTS $PKG_MAKE_OPTS_BOOTSTRAP
         fi
       fi
       if [ "$(type -t post_make_$TARGET)" = "function" ]; then
