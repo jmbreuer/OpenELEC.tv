@@ -36,47 +36,73 @@ fi
 [ -z "$PKG_URL" ] && exit 0
 
 if [ -n "$PKG_URL" ]; then
-  URLS="$URLS `echo $PKG_URL | sed s%GEEXBOX_SRCS%$GEEXBOX_SRCS%`"
-
-  for i in $URLS; do
-    SOURCE_NAME="`basename $i`"
+  if [[ "$PKG_URL" == file://* ]]; then
+    mkdir -p $SOURCES/$1
+    PKG_FILE=${PKG_URL#file://}
+    SOURCE_NAME="`basename $PKG_FILE`"
     PACKAGE="$SOURCES/$1/$SOURCE_NAME"
-    PACKAGE_MIRROR="$DISTRO_MIRROR/$PKG_NAME/$SOURCE_NAME"
-    [ "$VERBOSE" != "yes" ] && WGET_OPT=-q
-    WGET_CMD="wget --passive-ftp --no-check-certificate -c $WGET_OPT -P $SOURCES/$1"
 
-    NBWGET="1"
+    $SCRIPTS/checkdeps get
 
     STAMP="$PACKAGE.url"
     MD5SUM="$PACKAGE.md5"
 
-    mkdir -p $SOURCES/$1
-
     if [ -f "$STAMP" ]; then
-      [ `cat $STAMP` = "$i" ] && continue
+      [ "`cat $STAMP`" = "$PKG_URL" ] && exit 0
     fi
     DL="yes"
 
-    $SCRIPTS/checkdeps get
-
     rm -f $STAMP
+    cp $PKG_FILE $PACKAGE
 
-    printf "%${BUILD_INDENT}c GET      $1\n" ' '>&$SILENT_OUT
-    export BUILD_INDENT=$((${BUILD_INDENT:-1}+$BUILD_INDENT_SIZE))
-
-    until [ -f "$STAMP" ] || $WGET_CMD $i || $WGET_CMD $PACKAGE_MIRROR; do
-      NBWGET=$(($NBWGET+1))
-      if [ "$NBWGET" -gt "10" ]; then
-        echo -e "\nCant't get $1 sources : $i\n Try later !!"
-        exit 1
-      fi
-    done
-
-    echo $i > $STAMP
+    echo $PKG_URL > $STAMP
     md5sum -t $PACKAGE > $MD5SUM
 
     rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/unpack
     rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/build
+  else
+    URLS="$URLS `echo $PKG_URL | sed s%GEEXBOX_SRCS%$GEEXBOX_SRCS%`"
 
-  done
+    for i in $URLS; do
+      SOURCE_NAME="`basename $i`"
+      PACKAGE="$SOURCES/$1/$SOURCE_NAME"
+      PACKAGE_MIRROR="$DISTRO_MIRROR/$PKG_NAME/$SOURCE_NAME"
+      [ "$VERBOSE" != "yes" ] && WGET_OPT=-q
+      WGET_CMD="wget --passive-ftp --no-check-certificate -c $WGET_OPT -P $SOURCES/$1"
+
+      NBWGET="1"
+
+      STAMP="$PACKAGE.url"
+      MD5SUM="$PACKAGE.md5"
+
+      mkdir -p $SOURCES/$1
+
+      if [ -f "$STAMP" ]; then
+	[ `cat $STAMP` = "$i" ] && continue
+      fi
+      DL="yes"
+
+      $SCRIPTS/checkdeps get
+
+      rm -f $STAMP
+
+      printf "%${BUILD_INDENT}c GET      $1\n" ' '>&$SILENT_OUT
+      export BUILD_INDENT=$((${BUILD_INDENT:-1}+$BUILD_INDENT_SIZE))
+
+      until [ -f "$STAMP" ] || $WGET_CMD $i || $WGET_CMD $PACKAGE_MIRROR; do
+	NBWGET=$(($NBWGET+1))
+	if [ "$NBWGET" -gt "10" ]; then
+	  echo -e "\nCant't get $1 sources : $i\n Try later !!"
+	  exit 1
+	fi
+      done
+
+      echo $i > $STAMP
+      md5sum -t $PACKAGE > $MD5SUM
+
+      rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/unpack
+      rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/build
+
+    done
+  fi
 fi
