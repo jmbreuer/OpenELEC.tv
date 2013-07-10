@@ -20,7 +20,7 @@
 
 PKG_NAME="xbmc-pvr-addons"
 PKG_VERSION="frodo-910d7e7"
-if [ "$XBMC" = "master" ]; then
+if [ "$XBMC" = "master" -o "$XBMC" = jmbreuer ]; then
   PKG_VERSION="18597fd"
 fi
 PKG_REV="1"
