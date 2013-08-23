@@ -1,1 +1,1 @@
-PROJECT=Intel ARCH=x86_64 XBMC=jmbreuer MAKEOPTS="-j24 -l16" make release
+time PROJECT=Intel ARCH=x86_64 XBMC=jmbreuer MAKEOPTS="-j32 -l16" make release
