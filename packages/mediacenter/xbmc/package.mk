@@ -22,6 +22,8 @@ PKG_NAME="xbmc"
 PKG_VERSION="12.2-e2bbb6d"
 if [ "$XBMC" = "master" ]; then
   PKG_VERSION="13.alpha-2ef8929"
+elif [ "$XBMC" = "jmbreuer" ]; then
+  PKG_VERSION="jmbreuer"
 elif [ "$XBMC" = "xbmc-aml" ]; then
   PKG_VERSION="aml-frodo-d9119f2"
 fi
@@ -30,6 +32,9 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.xbmc.org"
 PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+if [ "$XBMC" = "jmbreuer" ]; then
+  PKG_URL="file:///tmp/xbmc-jmbreuer.tar"
+fi
 PKG_DEPENDS="Python zlib bzip2 systemd ffmpeg libass curl rtmpdump fontconfig freetype libmad libogg libmodplug faad2 flac libmpeg2 taglib service.openelec.settings"
 PKG_BUILD_DEPENDS_TARGET="toolchain boost Python zlib bzip2 systemd lzo pcre swig ffmpeg libass enca curl libssh rtmpdump fontconfig fribidi tinyxml libjpeg-turbo libpng tiff freetype jasper libmad libsamplerate libogg libcdio libmodplug faad2 flac libmpeg2 taglib yajl sqlite"
 PKG_PRIORITY="optional"
@@ -217,7 +222,7 @@ else
 fi
 
 if [ "$AIRTUNES_SUPPORT" = yes ]; then
-#  if [ "$XBMC" = master ]; then
+#  if [ "$XBMC" = "master" -o "$XBMC" = "jmbreuer" ]; then
     PKG_BUILD_DEPENDS_TARGET="$PKG_BUILD_DEPENDS_TARGET libshairplay"
     PKG_DEPENDS="$PKG_DEPENDS libshairplay"
 #  else
