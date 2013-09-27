@@ -24,6 +24,7 @@ if [ "$XBMC" = "master" ]; then
   PKG_VERSION="13.alpha-2ef8929"
 elif [ "$XBMC" = "jmbreuer" ]; then
   PKG_VERSION="jmbreuer"
+  XVBA="no"
 elif [ "$XBMC" = "xbmc-aml" ]; then
   PKG_VERSION="aml-frodo-d9119f2"
 fi
@@ -336,7 +337,11 @@ if [ "$XVBA" = yes ]; then
   done
   XBMC_XVBA="--enable-xvba"
 else
-  XBMC_XVBA="--disable-xvba"
+  if [ "$XBMC" = "jmbreuer" ]; then
+    XBMC_XVBA=""
+  else
+    XBMC_XVBA="--disable-xvba"
+  fi
 fi
 
 if [ "$CRYSTALHD" = yes ]; then

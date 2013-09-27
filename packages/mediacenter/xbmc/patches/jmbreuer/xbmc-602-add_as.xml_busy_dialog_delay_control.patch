@@ -1,7 +1,7 @@
-diff -Naur xbmc-12.1.8/xbmc/cores/dvdplayer/DVDPlayer.cpp xbmc-12.1.8.patch/xbmc/cores/dvdplayer/DVDPlayer.cpp
---- xbmc-12.1.8/xbmc/cores/dvdplayer/DVDPlayer.cpp	2013-04-24 23:38:36.000000000 +0200
-+++ xbmc-12.1.8.patch/xbmc/cores/dvdplayer/DVDPlayer.cpp	2013-04-26 00:49:07.732011721 +0200
-@@ -470,7 +470,7 @@
+diff -Naur xbmc-13.alpha-6edea14/xbmc/cores/dvdplayer/DVDPlayer.cpp xbmc-13.alpha-6edea14.patch/xbmc/cores/dvdplayer/DVDPlayer.cpp
+--- xbmc-13.alpha-6edea14/xbmc/cores/dvdplayer/DVDPlayer.cpp	2013-08-02 16:28:51.000000000 +0200
++++ xbmc-13.alpha-6edea14.patch/xbmc/cores/dvdplayer/DVDPlayer.cpp	2013-08-02 17:19:34.162512140 +0200
+@@ -479,7 +479,7 @@
  #endif
  
      Create();
@@ -10,11 +10,11 @@ diff -Naur xbmc-12.1.8/xbmc/cores/dvdplayer/DVDPlayer.cpp xbmc-12.1.8.patch/xbmc
      {
        CGUIDialogBusy* dialog = (CGUIDialogBusy*)g_windowManager.GetWindow(WINDOW_DIALOG_BUSY);
        if(dialog)
-diff -Naur xbmc-12.1.8/xbmc/cores/omxplayer/OMXPlayer.cpp xbmc-12.1.8.patch/xbmc/cores/omxplayer/OMXPlayer.cpp
---- xbmc-12.1.8/xbmc/cores/omxplayer/OMXPlayer.cpp	2013-04-24 23:38:36.000000000 +0200
-+++ xbmc-12.1.8.patch/xbmc/cores/omxplayer/OMXPlayer.cpp	2013-04-26 00:50:56.974691417 +0200
-@@ -474,7 +474,7 @@
-     g_renderManager.PreInit();
+diff -Naur xbmc-13.alpha-6edea14/xbmc/cores/omxplayer/OMXPlayer.cpp xbmc-13.alpha-6edea14.patch/xbmc/cores/omxplayer/OMXPlayer.cpp
+--- xbmc-13.alpha-6edea14/xbmc/cores/omxplayer/OMXPlayer.cpp	2013-08-02 16:28:51.000000000 +0200
++++ xbmc-13.alpha-6edea14.patch/xbmc/cores/omxplayer/OMXPlayer.cpp	2013-08-02 17:19:34.164512143 +0200
+@@ -522,7 +522,7 @@
+ #endif
  
      Create();
 -    if(!m_ready.WaitMSec(100))
@@ -22,18 +22,18 @@ diff -Naur xbmc-12.1.8/xbmc/cores/omxplayer/OMXPlayer.cpp xbmc-12.1.8.patch/xbmc
      {
        CGUIDialogBusy* dialog = (CGUIDialogBusy*)g_windowManager.GetWindow(WINDOW_DIALOG_BUSY);
        if(dialog)
-diff -Naur xbmc-12.1.8/xbmc/settings/AdvancedSettings.cpp xbmc-12.1.8.patch/xbmc/settings/AdvancedSettings.cpp
---- xbmc-12.1.8/xbmc/settings/AdvancedSettings.cpp	2013-04-26 00:48:59.375036542 +0200
-+++ xbmc-12.1.8.patch/xbmc/settings/AdvancedSettings.cpp	2013-04-26 00:49:07.732011721 +0200
-@@ -174,6 +174,7 @@
-   m_DXVAForceProcessorRenderer = true;
-   m_DXVANoDeintProcForProgressive = false;
-   m_videoFpsDetect = 1;
+diff -Naur xbmc-13.alpha-6edea14/xbmc/settings/AdvancedSettings.cpp xbmc-13.alpha-6edea14.patch/xbmc/settings/AdvancedSettings.cpp
+--- xbmc-13.alpha-6edea14/xbmc/settings/AdvancedSettings.cpp	2013-08-02 16:28:51.000000000 +0200
++++ xbmc-13.alpha-6edea14.patch/xbmc/settings/AdvancedSettings.cpp	2013-08-02 17:21:43.772739525 +0200
+@@ -184,6 +184,7 @@
+ 
+   m_videoDefaultLatency = 0.0;
+   m_videoDisableHi10pMultithreading = false;
 +  m_videoBusyDialogDelay_ms = 100;
-   m_stagefrightConfig.useAVCcodec = -1;
-   m_stagefrightConfig.useVC1codec = -1;
-   m_stagefrightConfig.useVPXcodec = -1;
-@@ -701,6 +702,10 @@
+ 
+   m_musicUseTimeSeeking = true;
+   m_musicTimeSeekForward = 10;
+@@ -700,6 +701,10 @@
      //0 = disable fps detect, 1 = only detect on timestamps with uniform spacing, 2 detect on all timestamps
      XMLUtils::GetInt(pElement, "fpsdetect", m_videoFpsDetect, 0, 2);
  
@@ -44,9 +44,9 @@ diff -Naur xbmc-12.1.8/xbmc/settings/AdvancedSettings.cpp xbmc-12.1.8.patch/xbmc
      // Store global display latency settings
      TiXmlElement* pVideoLatency = pElement->FirstChildElement("latency");
      if (pVideoLatency)
-diff -Naur xbmc-12.1.8/xbmc/settings/AdvancedSettings.h xbmc-12.1.8.patch/xbmc/settings/AdvancedSettings.h
---- xbmc-12.1.8/xbmc/settings/AdvancedSettings.h	2013-04-26 00:48:59.383036518 +0200
-+++ xbmc-12.1.8.patch/xbmc/settings/AdvancedSettings.h	2013-04-26 00:49:07.732011721 +0200
+diff -Naur xbmc-13.alpha-6edea14/xbmc/settings/AdvancedSettings.h xbmc-13.alpha-6edea14.patch/xbmc/settings/AdvancedSettings.h
+--- xbmc-13.alpha-6edea14/xbmc/settings/AdvancedSettings.h	2013-08-02 16:28:51.000000000 +0200
++++ xbmc-13.alpha-6edea14.patch/xbmc/settings/AdvancedSettings.h	2013-08-02 17:21:29.790714897 +0200
 @@ -190,6 +190,7 @@
      bool m_DXVANoDeintProcForProgressive;
      int  m_videoFpsDetect;

@@ -56,11 +56,11 @@ fi
 if [ "$XVBA" = yes ]; then
   FFMPEG_XVBA="--enable-xvba"
 else
-#  if [ "$XBMC" = "jmbreuer" ]; then
-#    FFMPEG_XVBA=""
-#  else
+  if [ "$XBMC" = "jmbreuer" ]; then
+    FFMPEG_XVBA=""
+  else
     FFMPEG_XVBA="--disable-xvba"
-#  fi
+  fi
 fi
 
 if [ "$XBMC" = "master" -o "$XBMC" = "jmbreuer" ]; then
