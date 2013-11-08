@@ -18,6 +18,9 @@
 
 PKG_NAME="xbmc-theme-Confluence"
 PKG_VERSION="13.alpha-a4342cf"
+elif [ "$XBMC" = "jmbreuer" ]; then
+  PKG_VERSION="jmbreuer"
+fi
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
