@@ -22,6 +22,8 @@ PKG_NAME="xbmc-theme-Confluence"
 PKG_VERSION="12.2-e2bbb6d"
 if [ "$XBMC" = "master" ]; then
   PKG_VERSION="13.alpha-2ef8929"
+elif [ "$XBMC" = "jmbreuer" ]; then
+  PKG_VERSION="jmbreuer"
 elif [ "$XBMC" = "xbmc-aml" ]; then
   PKG_VERSION="aml-frodo-d9119f2"
 fi
@@ -30,6 +32,9 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.xbmc.org"
 PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+if [ "$XBMC" = "jmbreuer" ]; then
+  PKG_URL="file:///tmp/xbmc-theme-Confluence-jmbreuer.tar"
+fi
 PKG_DEPENDS=""
 PKG_BUILD_DEPENDS="toolchain"
 PKG_PRIORITY="optional"
