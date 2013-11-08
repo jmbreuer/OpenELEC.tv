@@ -1,0 +1,11 @@
+--- a/configure.in	2013-11-08 12:32:20.446244917 +0100
++++ b/configure.in	2013-11-08 12:33:48.126323289 +0100
+@@ -1524,7 +1524,7 @@
+ # samba
+ if test "x$use_samba" != "xno"; then
+   PKG_CHECK_MODULES([SAMBA], [smbclient],
+-    [INCLUDES="$INCLUDES $SAMBA_CFLAGS"; LIBS="$LIBS $SAMBA_LIBS"],
++    [INCLUDES="$INCLUDES $SAMBA_CFLAGS"; LIBS="$LIBS $SAMBA_LIBS -ltevent -ltalloc -ltdb -lwbclient"],
+     [AC_CHECK_LIB([smbclient], [main],,
+       use_samba=no;AC_MSG_ERROR($missing_library))
+       USE_LIBSMBCLIENT=0
