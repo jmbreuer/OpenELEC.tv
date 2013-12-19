@@ -118,7 +118,6 @@ fi
 
     case "$RET" in
       0)
-        safe_shutdown poweroff
         ;;
       64)
         safe_shutdown poweroff
