@@ -18,11 +18,17 @@
 
 PKG_NAME="ffmpeg"
 PKG_VERSION="1.2.5"
+if [ "$XBMC" = "jmbreuer" ]; then
+  PKG_VERSION="jmbreuer"
+fi
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPL"
 PKG_SITE="http://ffmpeg.org"
 PKG_URL="http://ffmpeg.org/releases/$PKG_NAME-$PKG_VERSION.tar.bz2"
+if [ "$XBMC" = "jmbreuer" ]; then
+  PKG_URL="file:///tmp/ffmpeg-jmbreuer.tar"
+fi
 PKG_DEPENDS_TARGET="toolchain yasm:host zlib bzip2 libvorbis gnutls"
 PKG_PRIORITY="optional"
 PKG_SECTION="multimedia"
