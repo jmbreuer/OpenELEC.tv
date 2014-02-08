@@ -1877,25 +1877,6 @@ index 083d1e9..40b8403 100644
  
    XSetErrorHandler(XErrorHandler);
  }
-@@ -68,18 +69,6 @@ bool CWinSystemX11::InitWindowSystem()
- {
-   if ((m_dpy = XOpenDisplay(NULL)))
-   {
--
--    SDL_EnableUNICODE(1);
--    // set repeat to 10ms to ensure repeat time < frame time
--    // so that hold times can be reliably detected
--    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, 10);
--
--    SDL_GL_SetAttribute(SDL_GL_RED_SIZE,   8);
--    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
--    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,  8);
--    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
--    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
--
-     return CWinSystemBase::InitWindowSystem();
-   }
-   else
 @@ -117,45 +106,37 @@ bool CWinSystemX11::DestroyWindowSystem()
  
  bool CWinSystemX11::CreateNewWindow(const CStdString& name, bool fullScreen, RESOLUTION_INFO& res, PHANDLE_EVENT_FUNC userFunction)
@@ -3634,16 +3615,6 @@ index 4257aeb..5e86772 100644
  
    XSetErrorHandler(XErrorHandler);
  }
-@@ -69,7 +72,8 @@ bool CWinSystemX11::InitWindowSystem()
- {
-   if ((m_dpy = XOpenDisplay(NULL)))
-   {
--    return CWinSystemBase::InitWindowSystem();
-+    bool ret = CWinSystemBase::InitWindowSystem();
-+    return ret;
-   }
-   else
-     CLog::Log(LOGERROR, "GLX Error: No Display found");
 @@ -106,6 +110,8 @@ bool CWinSystemX11::DestroyWindowSystem()
  
      //we don't call XCloseDisplay() here, since ati keeps a pointer to our m_dpy
@@ -10124,20 +10095,6 @@ index 858cce0..e8caa38 100755
  
  #: system/settings/settings.xml
  msgctxt "#13500"
-@@ -14790,7 +14795,12 @@ msgctxt "#36429"
- msgid "Select this if the audio out connection only supports multichannel audio as Dolby Digital 5.1, this allows multichannel audio such as AAC5.1 or FLAC5.1 to be listened to in 5.1 surround sound. Note - transcoding can lead to a reduction in sound quality"
- msgstr ""
- 
--#empty strings from id 36430 to 36499
-+#: system/settings/settings.xml
-+msgctxt "#36430"
-+msgid "This option enables the deinterlacing methods available for software decoding. It gives the possiblity to use high quality deinterlacers in combination with VAAPI."
-+msgstr ""
-+
-+#empty strings from id 36431 to 36499
- #end reservation
- 
- #: system/settings/settings.xml
 diff --git a/system/settings/settings.xml b/system/settings/settings.xml
 index 6455c68..79796f6 100644
 --- a/system/settings/settings.xml
